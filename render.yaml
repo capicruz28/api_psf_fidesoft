@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: fastapi-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      # Variables para tu connection.py
+      - key: DB_SERVER
+        value: carpinsvr.database.windows.net
+      - key: DB_PORT
+        value: "1433"
+      - key: DB_DATABASE
+        value: bdprueba
+      - key: DB_USER
+        value: carpin
+      - key: DB_PASSWORD
+        value: S1st3m4s
+      
+      # Variables adicionales
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "30"
+      - key: SECRET_KEY
+        value: tu-clave-secreta-aqui
+        
+      # Variables admin (si las usas)
+      - key: DB_ADMIN_SERVER
+        value: carpinsvr.database.windows.net
+      - key: DB_ADMIN_PORT
+        value: "1433"
+      - key: DB_ADMIN_DATABASE
+        value: bdprueba
+      - key: DB_ADMIN_USER
+        value: carpin
+      - key: DB_ADMIN_PASSWORD
+        value: S1st3m4s
+      
+      # Variables de Firebase (configurar en Render Dashboard como secretos)
+      # IMPORTANTE: NO poner valores aquí, configurarlos como "Secret Files" o variables de entorno secretas
+      - key: FIREBASE_PROJECT_ID
+        sync: false  # No sincronizar desde Git
+      - key: GOOGLE_CLOUD_PROJECT
+        sync: false  # No sincronizar desde Git
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
